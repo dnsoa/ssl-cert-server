@@ -112,6 +112,7 @@ http {
 
         location / {
             content_by_lua_block {
+                ngx.header['Content-Type']="text/html;charset=UTF-8"
                 ngx.say("It works!")
             }
         }
@@ -120,7 +121,7 @@ http {
     # HTTP Server
     server {
         listen 80;
-        server_name example.com;
+        server_name hello.example.com;
 
         # Endpoint used for performing domain verification with Let's Encrypt.
         location /.well-known/acme-challenge/ {

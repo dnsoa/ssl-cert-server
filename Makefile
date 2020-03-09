@@ -2,7 +2,7 @@ BUILD_ENV := CGO_ENABLED=0
 BUILD=`date +%FT%T%z`
 LDFLAGS=-ldflags "-w -s -X main.Version=${VERSION} -X main.Build=${BUILD}"
 
-TARGET_EXEC := ssl-sert-server
+TARGET_EXEC := ssl-cert-server
 
 .PHONY: all clean setup build-linux build-osx build-windows
 
