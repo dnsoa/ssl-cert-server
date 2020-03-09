@@ -19,7 +19,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/jxskiss/ssl-cert-server/storage"
+	//"github.com/dnsoa/ssl-cert-server/storage"
 	"golang.org/x/crypto/acme"
 	"golang.org/x/crypto/acme/autocert"
 )
@@ -58,10 +58,10 @@ var (
 	listen      = flag.String("listen", "127.0.0.1:8999", "listen address, be sure DON'T open to the world")
 	staging     = flag.Bool("staging", false, "use Let's Encrypt staging directory (default false)")
 	cacheDir    = flag.String("cache-dir", "./secret-dir", "which directory to cache certificates, will be ignored if --redis provided")
-	redisDSN    = flag.String("redis", "", "use redis as certificates cache storage")
-	before      = flag.Int("before", 30, "renew certificates before how many days")
-	email       = flag.String("email", "", "contact email, if Let's Encrypt client's key is already registered, this is not used")
-	forceRSA    = flag.Bool("force-rsa", false, "generate certificates with 2048-bit RSA keys (default false)")
+	//redisDSN    = flag.String("redis", "", "use redis as certificates cache storage")
+	before   = flag.Int("before", 30, "renew certificates before how many days")
+	email    = flag.String("email", "", "contact email, if Let's Encrypt client's key is already registered, this is not used")
+	forceRSA = flag.Bool("force-rsa", false, "generate certificates with 2048-bit RSA keys (default false)")
 )
 
 func main() {
@@ -138,9 +138,9 @@ func main() {
 }
 
 func parseCacheImpl() (autocert.Cache, error) {
-	if *redisDSN != "" {
-		return storage.NewRedisCache(*redisDSN)
-	}
+	// if *redisDSN != "" {
+	// 	return storage.NewRedisCache(*redisDSN)
+	// }
 
 	// default directory cache
 	return autocert.DirCache(*cacheDir), nil
